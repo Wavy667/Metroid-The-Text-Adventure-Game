@@ -40,7 +40,6 @@ while True :
 		print("""
  test scene
  	""")
-		gSceneActions = ["left", "right"]
 		
 		pGetInput()
 
@@ -52,4 +51,3 @@ while True :
 				gCurrentScene = 2
 			case "right" :
 				gCurrentScene = 2
-			
