@@ -3,6 +3,7 @@ import time
 
 # main game variables
 gCurrentScene = 1
+gJustEnteredScene = True
 gMain = True
 gSceneMissleDoorOpen = [False]
 
@@ -32,16 +33,18 @@ def pGetInput() :
 			print("Your Beams:")
 			for x in pBeams :
 				print("-", x.title())
+			# only display missles if the player has them
 			if pHasMissles :
 				print("Missles:", pMissles)
 		elif pInput == "exit" :
 			print("See you next mission!")
 			sys.exit()
 		else :
+			# normal action input
 			try :
 				pInput = int(pInput)
 			except :
-				print("error")
+				print("Unknown input. Try again.")
 				continue
 			else :
 				print("\n------------------------------------------------------------")
@@ -51,17 +54,18 @@ def pGetInput() :
 Main loop
 """
 
+# intro text
 text = """
 Welcome to Metroid: The Text Adventure Game!
 
 You are the interstellar bounty hunter Samus Aran, who has
 been sent by the Galactic Federation to investigate planet
-Axius 77. They've found presense of Space Pirate activity
+Axius 77. They've found a presence of Space Pirate activity
 and they're suspicious of their behaviour. They've noted
 that an unknown powerful species lurks on the planet,
-however, but their scans and research could not determine
-what it could be, or what threat it could pose to you.
-They advise you to be careful, and tread lightly.
+however, their scans and research could not determine what
+it could be, or what threat it could pose to you. They
+advise you to be careful, and tread lightly.
 """
 
 # kinda hacky but idk
@@ -78,8 +82,6 @@ time.sleep(2)
 input("\nPress enter to continue. ")
 
 print("------------------------------------------------------------")
-
-gJustEnteredScene = True
 
 while True :
 	# scene 1
@@ -120,7 +122,7 @@ there's two hexagonal doors to your left and right.
 					gJustEnteredScene = True
 					gCurrentScene = 3
 					
-				elif pMissles == 0 :
+				elif pMissles == 0 : # can't open the door if the player doesn't have missles
 					print("\nYou do not have any missles to open the door.")
 				else :
 					print("\nYou can't seem to open this door. An explosive weapon could\nopen the door.\n")
